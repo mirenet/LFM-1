@@ -302,10 +302,10 @@ public class MainActivity extends AppCompatActivity {
                 return handleUrlLoading(view, request.getUrl().toString());
             }
 
-            @Override
+            /* @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 return handleUrlLoading(view, url);
-            }
+            } */
 
             private boolean handleUrlLoading(WebView view, String url) {
                 if (isExternalDomain(url)) {
