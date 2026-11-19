@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
     private WebView overlayWebView;
     private MenuControler menuControler;
     private DownloadHelper downloadHelper;
-    private AllowCORS allowCORS;
+    private AllowCors allowCors;
 
     private ValueCallback<Uri[]> uploadMessage;
     private ActivityResultLauncher<Intent> fileChooserLauncher;
@@ -230,8 +230,8 @@ public class MainActivity extends AppCompatActivity {
         CookieManager.getInstance().setAcceptCookie(true);
         CookieManager.getInstance().setAcceptThirdPartyCookies(webView, true);
 
-        allowCORS = new AllowCORS(this, webView, defaultWebViewUa);
-        allowCORS.register();
+        allowCors = new AllowCors(this, webView, defaultWebViewUa);
+        allowCors.register();
 
         webView.addJavascriptInterface(downloadHelper, "AndroidBridge");
         webView.addJavascriptInterface(new ConfigSaverInterface(this), "AndroidBridgeSaver");
@@ -379,8 +379,8 @@ public class MainActivity extends AppCompatActivity {
                 super.onPageStarted(view, url, favicon);
                 if (view == webView && url != null && url.startsWith("file://")) {
                     view.evaluateJavascript("window.webhtml = true;", null);
-                    if (allowCORS != null) {
-                        allowCORS.injectFetchHook(view, url);
+                    if (allowCors != null) {
+                        allowCors.injectFetchHook(view, url);
                     }
                 }
             }
@@ -392,8 +392,8 @@ public class MainActivity extends AppCompatActivity {
                 if (view == webView) {
                     if (url != null && url.startsWith("file://")) {
                         view.evaluateJavascript("window.webhtml = true;", null);
-                        if (allowCORS != null) {
-                            allowCORS.injectFetchHook(view, url);
+                        if (allowCors != null) {
+                            allowCors.injectFetchHook(view, url);
                         }
                     }
 
